@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Shoryuken</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Shoryuken">
+<meta property="og:url" content="https://shoryukenbt.github.io/blog/page/2/index.html">
+<meta property="og:site_name" content="Shoryuken">
+<meta property="og:locale">
+<meta property="article:author" content="yangbt">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Shoryuken" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.0.0-rc2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shoryuken</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shoryukenbt.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Tips" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/05/Tips/" class="article-date">
+  <time datetime="2019-05-05T07:05:52.000Z" itemprop="datePublished">2019-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/05/Tips/">Tips</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><h4 id="1-排版"><a href="#1-排版" class="headerlink" title="1. 排版"></a>1. 排版</h4><p>正常流的排版行为可以用<strong>一次排列，空间不足换行</strong>来总结，在CSS标准中规定了如何排布一个盒或者文字的算法，这个算法依赖排班的当前状态， 这个当前状态就是<strong>格式化上下文(formatting context)</strong>, 可以这样认为:</p>
+<blockquote>
+<p>格式化上下文 + 盒 / 文字 = 位置<br>需要排版元素（盒/文字）根据其行为分为<strong>行内元素</strong>和<strong>块级元素</strong>，排版分别为他们规定了<strong>块级格式化上下文(BFC)</strong>和<strong>行内及格式化上下文(IFC)</strong>, 当把正常流中的元素排版时就会有这三种情况，可以将一个块级格式化上下文中的排版规则分为三种情况：</p>
+<ul>
+<li><strong>遇到块级盒</strong> -&gt; 排入当前块级格式化上下文</li>
+<li><strong>遇到行内级盒或者文字</strong> -&gt; 如果当前行内级格式化上下文可以排下，直接排入当前行内级格式化上下文；如果排不下，会创建一个行盒(行盒是一个块级，按照上述排版)，然后行盒会创建一个行内级格式化上下文</li>
+<li><strong>遇到float盒</strong> -&gt; 会把喝的顶部和当前行内级上下文的上边缘对其， 再根据其方向将对应边与块级格式化上下文的边缘对齐， 然后重排当前行盒</li>
+</ul>
+</blockquote>
+<h5 id="新建BFC"><a href="#新建BFC" class="headerlink" title="新建BFC"></a>新建BFC</h5><p>实际上页面中的布局远比这复杂， 有些元素还会在其内部创建新的块格式化上下文</p>
+<ul>
+<li>浮动定位元素</li>
+<li>绝对定位元素</li>
+<li>能包含块级元素的非块级容器(inline-block, table-cell等)</li>
+<li><p>overflow不为visible的能包含块级元素的块级容器</p>
+<h5 id="正常流实用技巧"><a href="#正常流实用技巧" class="headerlink" title="正常流实用技巧"></a>正常流实用技巧</h5></li>
+<li>等分布局问题</li>
+<li>自适应宽<h4 id="2-flex布局"><a href="#2-flex布局" class="headerlink" title="2. flex布局"></a>2. flex布局</h4></li>
+</ul>
+<h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3><h4 id="1-判断对象类型的方法"><a href="#1-判断对象类型的方法" class="headerlink" title="1. 判断对象类型的方法"></a>1. 判断对象类型的方法</h4><ul>
+<li>普通对象可以通过<code>instanceOf</code>，<code>Object.prototype.toString</code>来判断</li>
+<li>对于基本类型和function可以通过<code>typeof</code>来判断</li>
+<li>NaN 可以用es6提供的方法<code>Number.isNaN</code>, 和<em>NaN</em>的特性自身不相等<code>obj !== obj</code>来判断</li>
+<li>Array类型还可以用<code>Array.isArray</code>来判断</li>
+</ul>
+<h4 id="2-JS运行机制"><a href="#2-JS运行机制" class="headerlink" title="2. JS运行机制"></a>2. JS运行机制</h4><h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><h4 id="1-Vue中computed-methods-watch的特点区别以及各自的适用场景"><a href="#1-Vue中computed-methods-watch的特点区别以及各自的适用场景" class="headerlink" title="1. Vue中computed,methods,watch的特点区别以及各自的适用场景"></a>1. Vue中computed,methods,watch的特点区别以及各自的适用场景</h4><h4 id="2-Vuex"><a href="#2-Vuex" class="headerlink" title="2. Vuex"></a>2. Vuex</h4><h4 id="3-Vue-router"><a href="#3-Vue-router" class="headerlink" title="3. Vue-router"></a>3. Vue-router</h4><h4 id="4-虚拟DOM-为什么比直接操纵DOM快"><a href="#4-虚拟DOM-为什么比直接操纵DOM快" class="headerlink" title="4. 虚拟DOM, 为什么比直接操纵DOM快"></a>4. 虚拟DOM, 为什么比直接操纵DOM快</h4><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><h4 id="1-React中的state和props"><a href="#1-React中的state和props" class="headerlink" title="1. React中的state和props"></a>1. React中的state和props</h4><h4 id="2-Redux"><a href="#2-Redux" class="headerlink" title="2. Redux"></a>2. Redux</h4><h4 id="3-Reat-router"><a href="#3-Reat-router" class="headerlink" title="3. Reat-router"></a>3. Reat-router</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/05/05/Tips/" data-id="clkp8g78j0008iswa6f463u8h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js-css-html/" rel="tag">js css html</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-使用openlayer展示地理信息" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/30/%E4%BD%BF%E7%94%A8openlayer%E5%B1%95%E7%A4%BA%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF/" class="article-date">
+  <time datetime="2019-04-30T07:15:07.000Z" itemprop="datePublished">2019-04-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%B1%BB%E5%BA%93/">第三方类库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/30/%E4%BD%BF%E7%94%A8openlayer%E5%B1%95%E7%A4%BA%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF/">使用openlayers</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用openlayers在网页中展示地理信息"><a href="#使用openlayers在网页中展示地理信息" class="headerlink" title="使用openlayers在网页中展示地理信息"></a>使用openlayers在网页中展示地理信息</h2><h3 id="1-了解一些类"><a href="#1-了解一些类" class="headerlink" title="1.  了解一些类"></a>1.  了解一些类</h3><hr>
+<p>这里涉及到几个基础的概念，View, Layer, Control, Interaction, Overlay, Source, Projection 这些对象一起构成了Map</p>
+<h4 id="1-1-View"><a href="#1-1-View" class="headerlink" title="1.1 View"></a>1.1 View</h4><p>View管理Map的视图参数，缩放zoom, 偏转rotation, 分辨率resolution, 视图中心center等，也可以对这些参数设置范围，从而实现对视图显示的控制</p>
+<h4 id="1-2-Layer"><a href="#1-2-Layer" class="headerlink" title="1.2 Layer"></a>1.2 Layer</h4><p>Layer是Map显示的基本单位，layer从自身的Source获取数据病将其显示在Map上，一个Map可以包含多个Layer，可以将这些Layer的数据同时显示在Map上，从而实现一个各种地理信息的显示</p>
+<blockquote>
+<p>上层的Layer会遮盖下层的Layer</p>
+</blockquote>
+<ul>
+<li><h6 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h6>  指定layer的数据来源<h4 id="1-3-Control"><a href="#1-3-Control" class="headerlink" title="1.3 Control"></a>1.3 Control</h4>openlayers自身包含了一些内置的Map控件，像全屏，定位，旋转的按钮，通过控件可以实现以Map的交互，也可以自定义实现需要功能的控件，实现业务需要的交互效果<h4 id="1-4-Interaction"><a href="#1-4-Interaction" class="headerlink" title="1.4 Interaction"></a>1.4 Interaction</h4>openlayers默认包含了拖拽，点击等常用的交互行为，如果要定制复杂的交互，可以自定义并注册到Map中就可以实现<h4 id="1-5-Overlay"><a href="#1-5-Overlay" class="headerlink" title="1.5 Overlay"></a>1.5 Overlay</h4>高组件可以将dom节点与地图坐标系位置绑定，将dom显示在绑定的地理坐标，该dom将被openlayer控制显示</li>
+</ul>
+<p><img src="../assets/img/map_constructor.png" alt=""></p>
+<h3 id="2-做一个简单的实现"><a href="#2-做一个简单的实现" class="headerlink" title="2. 做一个简单的实现"></a>2. 做一个简单的实现</h3><hr>
+<p>创建贴图层显示底图，这里使用本地的WMS服务</p>
+<pre><code>var imageLayer = new ol.layer.Image(&#123;
+    source: new ol.source.ImageWMS(&#123;
+        params: &#123;
+            LAYERS: &apos;_all_&apos;, // 图层名称
+            FORMAT: &apos;image/png&apos;, // 图片格式
+            VERSION: &apos;1.1.1&apos; // 服务版本号
+        &#125;,
+        projection: &apos;EPSG3857&apos;, //投影坐标系
+        url: URL // WMS地址
+    &#125;);
+&#125;);
+</code></pre><p>创建一个矢量图层，显示一些矢量数据</p>
+<pre><code>var vectorLayer = new ol.source.Vector(&#123;
+    format: new ol.format.GeoJSON(),
+    style: styleInstance //设置矢量数据的显示样式
+&#125;);
+</code></pre><p>创建View，设置视图</p>
+<pre><code>var view = new ol.View(&#123;
+    center: [75, 30], //当前投影坐标系下中心点的坐标
+    zoom: 15 //缩放等级
+&#125;);
+</code></pre><p>根据View, Layer创建Map实例，病挂载到id为map_container的dom节点上</p>
+<pre><code>var map = new ol.Map(&#123;
+    target: &apos;map_container&apos;, // 将地图挂在到id为map_container的dom上
+    view: view,
+    layers: [// 图层顺序与列表顺序相反
+        imageLayer,
+        vectorLayer
+    ]
+&#125;);
+</code></pre><p>这时已经可以到生成的Map的效果， 类似这样<br><img src="../assets/img/1556593459.jpg" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/04/30/%E4%BD%BF%E7%94%A8openlayer%E5%B1%95%E7%A4%BA%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF/" data-id="clkp8g79a0012iswagkfgg0gc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openlayers/" rel="tag">openlayers</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vue实践" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/08/Vue%E5%AE%9E%E8%B7%B5/" class="article-date">
+  <time datetime="2019-04-08T07:29:10.000Z" itemprop="datePublished">2019-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/08/Vue%E5%AE%9E%E8%B7%B5/">Vue实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vue踩雷"><a href="#Vue踩雷" class="headerlink" title="Vue踩雷"></a>Vue踩雷</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/04/08/Vue%E5%AE%9E%E8%B7%B5/" data-id="clkp8g78m000ciswaak8d5py0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-React实践" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/01/React%E5%AE%9E%E8%B7%B5/" class="article-date">
+  <time datetime="2019-04-01T07:29:10.000Z" itemprop="datePublished">2019-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/01/React%E5%AE%9E%E8%B7%B5/">React实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="React实践"><a href="#React实践" class="headerlink" title="React实践"></a>React实践</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/04/01/React%E5%AE%9E%E8%B7%B5/" data-id="clkp8g78f0005iswa5ap41kw2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-HTML梳理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/08/HTML%E6%A2%B3%E7%90%86/" class="article-date">
+  <time datetime="2019-03-08T07:27:52.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/HTML%E6%A2%B3%E7%90%86/">HTML梳理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="HTML梳理"><a href="#HTML梳理" class="headerlink" title="HTML梳理"></a>HTML梳理</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/03/08/HTML%E6%A2%B3%E7%90%86/" data-id="clkp8g78e0004iswa5wfsb7l8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/" rel="tag">html</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CSS梳理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/08/CSS%E6%A2%B3%E7%90%86/" class="article-date">
+  <time datetime="2019-03-08T07:27:26.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/CSS%E6%A2%B3%E7%90%86/">CSS梳理.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CSS梳理"><a href="#CSS梳理" class="headerlink" title="CSS梳理"></a>CSS梳理</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/03/08/CSS%E6%A2%B3%E7%90%86/" data-id="clkp8g7870001iswa4p0lcfhz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-javascript梳理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/08/javascript%E6%A2%B3%E7%90%86/" class="article-date">
+  <time datetime="2019-03-08T03:37:28.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/javascript%E6%A2%B3%E7%90%86/">javascript梳理.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="javascript要点梳理"><a href="#javascript要点梳理" class="headerlink" title="javascript要点梳理"></a>javascript要点梳理</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>javascript语言规定了7种数据类型，分别是</p>
+<ol>
+<li>Undefined</li>
+<li>Null</li>
+<li>Boolean</li>
+<li>String</li>
+<li>Number</li>
+<li>Symbol</li>
+<li>Object</li>
+</ol>
+<p>这些数据类型分为两种类型，<code>基本类型</code>和<code>引用类型</code>，其中除了<strong>Object</strong>是引用类型， 其他都是基本类型。</p>
+<p><strong>String</strong>并不是严格意义上的字符串，是字符串的UTF16编码，对字符串的所有操纵都是战队UTF16编码的，有这些特性</p>
+<ul>
+<li>字符串的最大长度受字符串的编码长度控制</li>
+<li>BMP(基本基辅区域)的范围0-65536（U+0000 - U+FFFF）</li>
+<li>字符串一旦创建就无法被改变，所有的修改都是创建新的字符串</li>
+<li>JS把字符串中每个UTF16单元当做一个字符来处理，所以当处理非BMP时，可能会产生和预期不一致的后果 </li>
+</ul>
+<p><strong>Number</strong>在JS中都用双精度浮点数规则表示，JS为了不让除以0出错引入了Infinity的概念，number具有这些特点</p>
+<ul>
+<li>根据浮点数的定义，非整数的Number运算可能存在精度问题，可能会差一个微小的值，不能用<code>==</code>和<code>===</code>直接比较，比如经典的<code>0.1 + 0.2 !== 0.3</code>问题，这里引入了一个<strong>最小精度</strong>的概念<code>Number.EPSILON</code>, 正确的比较方法应该使用JS提供的这个最小精度值<br><code>Math.abs(0.1 + 0.2 - 0.3) &lt;= Number.EPSILON</code></li>
+<li>在除法运算中要区分<code>0</code>的特殊性，大于的整数除以0的值是Infinity, 0除以0是NaN<br><code>A/0 -&gt; Infinity</code><br><code>A/-0 -&gt; -Infinity</code><br><code>0/0 -&gt; NaN</code></li>
+</ul>
+<p><strong>Symbol</strong>是ES6中新引入的类型，表示非字符串的<code>key</code>, 具有这些特性</p>
+<ul>
+<li>值具有唯一性, 即使描述相同<code>Symbol(&#39;str&#39;) !== Symbol(&#39;str&#39;)</code></li>
+</ul>
+<p><strong>Object</strong>是JS中最复杂的类型，同时也是所有对象的原型</p>
+<ul>
+<li>每个对象均有自己的Class属性， 可以用<code>Object.protoType.toString</code>获取, 并用来判断对象类型<br><code>Object.prototype.toString.call([]) -&gt; [object Array]</code></li>
+</ul>
+<blockquote>
+<p>基本类型<code>.</code>操作符会产生封箱和拆箱操纵 <code>&#39;abc&#39;.length -&gt; 3</code></p>
+</blockquote>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><h4 id="StringToNumber"><a href="#StringToNumber" class="headerlink" title="StringToNumber"></a>StringToNumber</h4><ul>
+<li>可以使用<code>Number</code>函数，不加<code>new</code>表示转换为数字，支持<code>二进制</code>, <code>八进制</code>, <code>十进制</code>, <code>十六进制</code>的值，比如<code>Number(0b111)</code>, <code>Number(0xFF)</code>, <code>Number(30)</code>, <code>Number(0o13)</code>等， 还包括科学计数法<code>Number(1e3)</code>, <code>Number(-1e-2)</code>等</li>
+<li>也可以使用<code>parseInt(str, ?radix)</code>， 在不传第二参数的时候，只支持16进制前缀<code>0x</code>, 会忽略非数字以及之后的字符，<br><code>parseInt(&#39;13ab12121&#39;) -&gt; 13; parseInt(&#39;0xff&#39;) -&gt; 255</code></li>
+<li><code>parseFloat</code>直接将字符串当做十进制来解析，不支持其他进制</li>
+</ul>
+<h4 id="NumberToString"><a href="#NumberToString" class="headerlink" title="NumberToString"></a>NumberToString</h4><ul>
+<li>数字较小范围时，知己转换为字符串， 当数值绝对值过大时， 会转换为<code>科学计数法</code>的字符串<br><code>String(65464546546487887980000) -&gt; &quot;6.5464546546487885e+22&quot;</code><h4 id="Object转基本类型"><a href="#Object转基本类型" class="headerlink" title="Object转基本类型"></a>Object转基本类型</h4></li>
+<li>类型转换内部实现是通过toPrimitive(input, PreferredType)实现<h4 id="判断数据类型"><a href="#判断数据类型" class="headerlink" title="判断数据类型"></a>判断数据类型</h4><ul>
+<li><strong>typeof</strong>可以用于判断除了null之外的基础类型，和function</li>
+<li>Object.prototype.toString 可以用来判断引用数据的类型， 基本类型也可以使用，只不过在使用的过程中会被转化为相应的包装对象<br><code>Object.prototype.toString.call(false)  -&gt; &quot;[object Boolean]&quot;</code><br><code>Object.prototype.toString.call(1)  -&gt; &quot;[object Number]&quot;</code><br><code>Object.prototype.toString.call(&#39;a&#39;)  -&gt; &quot;[object String]&quot;</code><br><code>Object.prototype.toString.call(Symbol(&#39;a&#39;))  -&gt; &quot;[object Symbol]&quot;</code><br><code>Object.prototype.toString.call([])  -&gt; &quot;[object Array]&quot;</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/03/08/javascript%E6%A2%B3%E7%90%86/" data-id="clkp8g78x000jiswa6grh7nav" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaScript/" rel="tag">javaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%B1%BB%E5%BA%93/">第三方类库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSSOM/" rel="tag">CSSOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flag/" rel="tag">Flag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/" rel="tag">javaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-css-html/" rel="tag">js css html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openlayers/" rel="tag">openlayers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSSOM/" style="font-size: 10px;">CSSOM</a> <a href="/tags/Flag/" style="font-size: 10px;">Flag</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-css-html/" style="font-size: 10px;">js css html</a> <a href="/tags/openlayers/" style="font-size: 10px;">openlayers</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/24/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A066%E5%A4%A9/">持续学习66天</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/21/%E4%BC%AA%E5%85%83%E7%B4%A0%E5%92%8C%E4%BC%AA%E7%B1%BB/">伪元素和伪类</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/20/%E5%85%B3%E4%BA%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D/">关于移动端适配</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/16/%E4%B8%BA%E4%BB%80%E4%B9%88-1000-500-%E4%B8%BAtrue/"> 为什么&#39;1000&#39;&lt;&#39;500&#39;为true</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/15/Vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9/">Vue基础知识点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 yangbt<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

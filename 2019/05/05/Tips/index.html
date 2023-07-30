@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Tips | Shoryuken</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CSS1. 排版正常流的排版行为可以用一次排列，空间不足换行来总结，在CSS标准中规定了如何排布一个盒或者文字的算法，这个算法依赖排班的当前状态， 这个当前状态就是格式化上下文(formatting context), 可以这样认为:  格式化上下文 + 盒 &#x2F; 文字 &#x3D; 位置需要排版元素（盒&#x2F;文字）根据其行为分为行内元素和块级元素，排版分别为他们规定了块级格式化上下文(BFC)和行内及格式化上下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tips">
+<meta property="og:url" content="https://shoryukenbt.github.io/blog/2019/05/05/Tips/index.html">
+<meta property="og:site_name" content="Shoryuken">
+<meta property="og:description" content="CSS1. 排版正常流的排版行为可以用一次排列，空间不足换行来总结，在CSS标准中规定了如何排布一个盒或者文字的算法，这个算法依赖排班的当前状态， 这个当前状态就是格式化上下文(formatting context), 可以这样认为:  格式化上下文 + 盒 &#x2F; 文字 &#x3D; 位置需要排版元素（盒&#x2F;文字）根据其行为分为行内元素和块级元素，排版分别为他们规定了块级格式化上下文(BFC)和行内及格式化上下">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-05-05T07:05:52.000Z">
+<meta property="article:modified_time" content="2023-07-30T08:37:31.567Z">
+<meta property="article:author" content="yangbt">
+<meta property="article:tag" content="js css html">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Shoryuken" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.0.0-rc2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shoryuken</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shoryukenbt.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Tips" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/05/Tips/" class="article-date">
+  <time datetime="2019-05-05T07:05:52.000Z" itemprop="datePublished">2019-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Tips
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><h4 id="1-排版"><a href="#1-排版" class="headerlink" title="1. 排版"></a>1. 排版</h4><p>正常流的排版行为可以用<strong>一次排列，空间不足换行</strong>来总结，在CSS标准中规定了如何排布一个盒或者文字的算法，这个算法依赖排班的当前状态， 这个当前状态就是<strong>格式化上下文(formatting context)</strong>, 可以这样认为:</p>
+<blockquote>
+<p>格式化上下文 + 盒 / 文字 = 位置<br>需要排版元素（盒/文字）根据其行为分为<strong>行内元素</strong>和<strong>块级元素</strong>，排版分别为他们规定了<strong>块级格式化上下文(BFC)</strong>和<strong>行内及格式化上下文(IFC)</strong>, 当把正常流中的元素排版时就会有这三种情况，可以将一个块级格式化上下文中的排版规则分为三种情况：</p>
+<ul>
+<li><strong>遇到块级盒</strong> -&gt; 排入当前块级格式化上下文</li>
+<li><strong>遇到行内级盒或者文字</strong> -&gt; 如果当前行内级格式化上下文可以排下，直接排入当前行内级格式化上下文；如果排不下，会创建一个行盒(行盒是一个块级，按照上述排版)，然后行盒会创建一个行内级格式化上下文</li>
+<li><strong>遇到float盒</strong> -&gt; 会把喝的顶部和当前行内级上下文的上边缘对其， 再根据其方向将对应边与块级格式化上下文的边缘对齐， 然后重排当前行盒</li>
+</ul>
+</blockquote>
+<h5 id="新建BFC"><a href="#新建BFC" class="headerlink" title="新建BFC"></a>新建BFC</h5><p>实际上页面中的布局远比这复杂， 有些元素还会在其内部创建新的块格式化上下文</p>
+<ul>
+<li>浮动定位元素</li>
+<li>绝对定位元素</li>
+<li>能包含块级元素的非块级容器(inline-block, table-cell等)</li>
+<li><p>overflow不为visible的能包含块级元素的块级容器</p>
+<h5 id="正常流实用技巧"><a href="#正常流实用技巧" class="headerlink" title="正常流实用技巧"></a>正常流实用技巧</h5></li>
+<li>等分布局问题</li>
+<li>自适应宽<h4 id="2-flex布局"><a href="#2-flex布局" class="headerlink" title="2. flex布局"></a>2. flex布局</h4></li>
+</ul>
+<h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3><h4 id="1-判断对象类型的方法"><a href="#1-判断对象类型的方法" class="headerlink" title="1. 判断对象类型的方法"></a>1. 判断对象类型的方法</h4><ul>
+<li>普通对象可以通过<code>instanceOf</code>，<code>Object.prototype.toString</code>来判断</li>
+<li>对于基本类型和function可以通过<code>typeof</code>来判断</li>
+<li>NaN 可以用es6提供的方法<code>Number.isNaN</code>, 和<em>NaN</em>的特性自身不相等<code>obj !== obj</code>来判断</li>
+<li>Array类型还可以用<code>Array.isArray</code>来判断</li>
+</ul>
+<h4 id="2-JS运行机制"><a href="#2-JS运行机制" class="headerlink" title="2. JS运行机制"></a>2. JS运行机制</h4><h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><h4 id="1-Vue中computed-methods-watch的特点区别以及各自的适用场景"><a href="#1-Vue中computed-methods-watch的特点区别以及各自的适用场景" class="headerlink" title="1. Vue中computed,methods,watch的特点区别以及各自的适用场景"></a>1. Vue中computed,methods,watch的特点区别以及各自的适用场景</h4><h4 id="2-Vuex"><a href="#2-Vuex" class="headerlink" title="2. Vuex"></a>2. Vuex</h4><h4 id="3-Vue-router"><a href="#3-Vue-router" class="headerlink" title="3. Vue-router"></a>3. Vue-router</h4><h4 id="4-虚拟DOM-为什么比直接操纵DOM快"><a href="#4-虚拟DOM-为什么比直接操纵DOM快" class="headerlink" title="4. 虚拟DOM, 为什么比直接操纵DOM快"></a>4. 虚拟DOM, 为什么比直接操纵DOM快</h4><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><h4 id="1-React中的state和props"><a href="#1-React中的state和props" class="headerlink" title="1. React中的state和props"></a>1. React中的state和props</h4><h4 id="2-Redux"><a href="#2-Redux" class="headerlink" title="2. Redux"></a>2. Redux</h4><h4 id="3-Reat-router"><a href="#3-Reat-router" class="headerlink" title="3. Reat-router"></a>3. Reat-router</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/05/05/Tips/" data-id="clkp8g78j0008iswa6f463u8h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js-css-html/" rel="tag">js css html</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/08/%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E5%87%86%E7%A1%AE%E4%BD%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          怎么获取元素的准确位置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/30/%E4%BD%BF%E7%94%A8openlayer%E5%B1%95%E7%A4%BA%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用openlayers</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%B1%BB%E5%BA%93/">第三方类库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSSOM/" rel="tag">CSSOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flag/" rel="tag">Flag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/" rel="tag">javaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-css-html/" rel="tag">js css html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openlayers/" rel="tag">openlayers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSSOM/" style="font-size: 10px;">CSSOM</a> <a href="/tags/Flag/" style="font-size: 10px;">Flag</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-css-html/" style="font-size: 10px;">js css html</a> <a href="/tags/openlayers/" style="font-size: 10px;">openlayers</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/24/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A066%E5%A4%A9/">持续学习66天</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/21/%E4%BC%AA%E5%85%83%E7%B4%A0%E5%92%8C%E4%BC%AA%E7%B1%BB/">伪元素和伪类</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/20/%E5%85%B3%E4%BA%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D/">关于移动端适配</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/16/%E4%B8%BA%E4%BB%80%E4%B9%88-1000-500-%E4%B8%BAtrue/"> 为什么&#39;1000&#39;&lt;&#39;500&#39;为true</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/15/Vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9/">Vue基础知识点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 yangbt<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

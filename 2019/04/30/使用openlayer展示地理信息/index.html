@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>使用openlayers | Shoryuken</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用openlayers在网页中展示地理信息1.  了解一些类 这里涉及到几个基础的概念，View, Layer, Control, Interaction, Overlay, Source, Projection 这些对象一起构成了Map 1.1 ViewView管理Map的视图参数，缩放zoom, 偏转rotation, 分辨率resolution, 视图中心center等，也可以对这些参数设">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用openlayers">
+<meta property="og:url" content="https://shoryukenbt.github.io/blog/2019/04/30/%E4%BD%BF%E7%94%A8openlayer%E5%B1%95%E7%A4%BA%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF/index.html">
+<meta property="og:site_name" content="Shoryuken">
+<meta property="og:description" content="使用openlayers在网页中展示地理信息1.  了解一些类 这里涉及到几个基础的概念，View, Layer, Control, Interaction, Overlay, Source, Projection 这些对象一起构成了Map 1.1 ViewView管理Map的视图参数，缩放zoom, 偏转rotation, 分辨率resolution, 视图中心center等，也可以对这些参数设">
+<meta property="og:locale">
+<meta property="og:image" content="https://shoryukenbt.github.io/blog/2019/04/30/assets/img/map_constructor.png">
+<meta property="og:image" content="https://shoryukenbt.github.io/blog/2019/04/30/assets/img/1556593459.jpg">
+<meta property="article:published_time" content="2019-04-30T07:15:07.000Z">
+<meta property="article:modified_time" content="2023-07-30T08:37:31.571Z">
+<meta property="article:author" content="yangbt">
+<meta property="article:tag" content="openlayers">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shoryukenbt.github.io/blog/2019/04/30/assets/img/map_constructor.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Shoryuken" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.0.0-rc2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shoryuken</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shoryukenbt.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-使用openlayer展示地理信息" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/30/%E4%BD%BF%E7%94%A8openlayer%E5%B1%95%E7%A4%BA%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF/" class="article-date">
+  <time datetime="2019-04-30T07:15:07.000Z" itemprop="datePublished">2019-04-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%B1%BB%E5%BA%93/">第三方类库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用openlayers
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用openlayers在网页中展示地理信息"><a href="#使用openlayers在网页中展示地理信息" class="headerlink" title="使用openlayers在网页中展示地理信息"></a>使用openlayers在网页中展示地理信息</h2><h3 id="1-了解一些类"><a href="#1-了解一些类" class="headerlink" title="1.  了解一些类"></a>1.  了解一些类</h3><hr>
+<p>这里涉及到几个基础的概念，View, Layer, Control, Interaction, Overlay, Source, Projection 这些对象一起构成了Map</p>
+<h4 id="1-1-View"><a href="#1-1-View" class="headerlink" title="1.1 View"></a>1.1 View</h4><p>View管理Map的视图参数，缩放zoom, 偏转rotation, 分辨率resolution, 视图中心center等，也可以对这些参数设置范围，从而实现对视图显示的控制</p>
+<h4 id="1-2-Layer"><a href="#1-2-Layer" class="headerlink" title="1.2 Layer"></a>1.2 Layer</h4><p>Layer是Map显示的基本单位，layer从自身的Source获取数据病将其显示在Map上，一个Map可以包含多个Layer，可以将这些Layer的数据同时显示在Map上，从而实现一个各种地理信息的显示</p>
+<blockquote>
+<p>上层的Layer会遮盖下层的Layer</p>
+</blockquote>
+<ul>
+<li><h6 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h6>  指定layer的数据来源<h4 id="1-3-Control"><a href="#1-3-Control" class="headerlink" title="1.3 Control"></a>1.3 Control</h4>openlayers自身包含了一些内置的Map控件，像全屏，定位，旋转的按钮，通过控件可以实现以Map的交互，也可以自定义实现需要功能的控件，实现业务需要的交互效果<h4 id="1-4-Interaction"><a href="#1-4-Interaction" class="headerlink" title="1.4 Interaction"></a>1.4 Interaction</h4>openlayers默认包含了拖拽，点击等常用的交互行为，如果要定制复杂的交互，可以自定义并注册到Map中就可以实现<h4 id="1-5-Overlay"><a href="#1-5-Overlay" class="headerlink" title="1.5 Overlay"></a>1.5 Overlay</h4>高组件可以将dom节点与地图坐标系位置绑定，将dom显示在绑定的地理坐标，该dom将被openlayer控制显示</li>
+</ul>
+<p><img src="../assets/img/map_constructor.png" alt=""></p>
+<h3 id="2-做一个简单的实现"><a href="#2-做一个简单的实现" class="headerlink" title="2. 做一个简单的实现"></a>2. 做一个简单的实现</h3><hr>
+<p>创建贴图层显示底图，这里使用本地的WMS服务</p>
+<pre><code>var imageLayer = new ol.layer.Image(&#123;
+    source: new ol.source.ImageWMS(&#123;
+        params: &#123;
+            LAYERS: &apos;_all_&apos;, // 图层名称
+            FORMAT: &apos;image/png&apos;, // 图片格式
+            VERSION: &apos;1.1.1&apos; // 服务版本号
+        &#125;,
+        projection: &apos;EPSG3857&apos;, //投影坐标系
+        url: URL // WMS地址
+    &#125;);
+&#125;);
+</code></pre><p>创建一个矢量图层，显示一些矢量数据</p>
+<pre><code>var vectorLayer = new ol.source.Vector(&#123;
+    format: new ol.format.GeoJSON(),
+    style: styleInstance //设置矢量数据的显示样式
+&#125;);
+</code></pre><p>创建View，设置视图</p>
+<pre><code>var view = new ol.View(&#123;
+    center: [75, 30], //当前投影坐标系下中心点的坐标
+    zoom: 15 //缩放等级
+&#125;);
+</code></pre><p>根据View, Layer创建Map实例，病挂载到id为map_container的dom节点上</p>
+<pre><code>var map = new ol.Map(&#123;
+    target: &apos;map_container&apos;, // 将地图挂在到id为map_container的dom上
+    view: view,
+    layers: [// 图层顺序与列表顺序相反
+        imageLayer,
+        vectorLayer
+    ]
+&#125;);
+</code></pre><p>这时已经可以到生成的Map的效果， 类似这样<br><img src="../assets/img/1556593459.jpg" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoryukenbt.github.io/blog/2019/04/30/%E4%BD%BF%E7%94%A8openlayer%E5%B1%95%E7%A4%BA%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF/" data-id="clkp8g79a0012iswagkfgg0gc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openlayers/" rel="tag">openlayers</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/05/Tips/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Tips
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/08/Vue%E5%AE%9E%E8%B7%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue实践</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%B1%BB%E5%BA%93/">第三方类库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSSOM/" rel="tag">CSSOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flag/" rel="tag">Flag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/" rel="tag">javaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-css-html/" rel="tag">js css html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openlayers/" rel="tag">openlayers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSSOM/" style="font-size: 10px;">CSSOM</a> <a href="/tags/Flag/" style="font-size: 10px;">Flag</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-css-html/" style="font-size: 10px;">js css html</a> <a href="/tags/openlayers/" style="font-size: 10px;">openlayers</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/24/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A066%E5%A4%A9/">持续学习66天</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/21/%E4%BC%AA%E5%85%83%E7%B4%A0%E5%92%8C%E4%BC%AA%E7%B1%BB/">伪元素和伪类</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/20/%E5%85%B3%E4%BA%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D/">关于移动端适配</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/16/%E4%B8%BA%E4%BB%80%E4%B9%88-1000-500-%E4%B8%BAtrue/"> 为什么&#39;1000&#39;&lt;&#39;500&#39;为true</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/15/Vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9/">Vue基础知识点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 yangbt<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
